@@ -1,0 +1,8 @@
+<div class="wrapper" *ngIf="(user)" >
+    <app-navbar  [usuario]="user"></app-navbar>
+    <app-sidebar [opciones]="opciones" [usuario]="user"></app-sidebar>
+
+    <div class="content-wrapper py-3 px-md-3 px-0">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-md-5 mx-auto mt-3 my-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-danger" [hidden]="!error">
+                        <strong>{{ error }}</strong>
+                    </div>
+                    <form action="" #loginForm=ngForm (ngSubmit)="login()">
+                        
+                        <h1 class="text-center font-weight-bold">Bienvenido</h1>
+                        <span class="login100-form-avatar my-5" >
+                            <img src="assets/img/login/login-user4.png"  alt="">
+                        </span>
+                        
+                        <div class="wrap-input100 my-4">
+                            <input type="email" (blur)="addClassEmail()" class="input100" name="email" id="email" [(ngModel)]="form.email" required>
+                            <span class="focus-input100" data-placeholder="Correo electronico o nombre de usuario"></span>
+                        </div>
+            
+                        <div class="wrap-input100 my-4">
+                            <input type="password" (blur)="addClassPassword()" name="password" id="password" class="input100" [(ngModel)]="form.password" required>
+                            <span class="focus-input100" data-placeholder="Contraseña"></span>
+                        </div>
+            
+                        
+                            <button class="btn btn-success btn-block boton my-4 p-2" [disabled]="!loginForm.form.valid">                    
+                                Iniciar sesión
+                            </button>
+        
+                    </form>
+                    <ul class="login-more p-t-190">
+                        <li class="mb-2">
+                            <a routerLink="/password/reset" class="txt2">
+                                ¿Olvidó la contraseña?
+                            </a>
+                        </li>
+        
+                        <li>
+                            <span class="txt1">
+                                Aún no es miembro?
+                            </span>
+        
+                            <a routerLink="/register" class="txt2">
+                                Unirse ahora
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

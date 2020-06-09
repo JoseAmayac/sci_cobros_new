@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- general form elements -->
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title" *ngIf="!aEditar" >Agregar nueva ruta</h3>
+                <h3 class="card-title" *ngIf="aEditar" >Actualizar información de la ruta</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" (ngSubmit)="aEditar ? update() : createRoute()" #fCreateRoute=ngForm >
+                <div class="card-body mb-0">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre de la ruta</label>
+                    <input type="text" name="name" #name=ngModel [(ngModel)]="route.name" class="form-control" id="exampleInputEmail1" minlength="3" placeholder="Nombre" autocomplete="off" 
+                    [ngClass]="{'is-invalid':name.invalid && (name.dirty || name.touched) || error.name, 'is-valid':name.valid && !error.name }" required>
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                        <div class="invalid-feedback"  *ngIf="name.errors.required">
+                            Por favor ingrese el nombre de la ruta
+                        </div>
+    
+                        <div class="invalid-feedback"  *ngIf="name.errors.minlength">
+                            El nombre de la ruta debe contener al menos 3 caracteres
+                        </div>
+                    </div>
+
+                    <div class="valid-feedback" [hidden]="!name.valid || error.name">
+                        Se ve bien!
+                    </div>  
+
+                    <div class="alert alert-danger rounded-0" *ngIf="error.name" role="alert">
+                      {{ error.name }}
+                    </div>
+
+                  </div>
+
+                  <div class="form-group mb-0">
+                    <label for="exampleInputPassword1">Monto disponible en la ruta</label>
+                    <input #ammount=ngModel type="number" name="ammount" [(ngModel)]="route.ammount" class="form-control" id="exampleInputPassword1" placeholder="Monto"
+                    [ngClass]="{'is-invalid':ammount.invalid && (ammount.dirty || ammount.touched) || error.ammount,  'is-valid':ammount.valid && !error.ammount }" required>
+
+                    <div *ngIf="ammount.invalid && (ammount.dirty || ammount.touched)">
+                        <div class="invalid-feedback"  *ngIf="ammount.errors.required">
+                            Por favor ingrese el monto disponible de la ruta
+                        </div>
+                    </div>
+
+                    <div class="valid-feedback" [hidden]="!ammount.valid || error.ammount">
+                        Se ve bien!
+                    </div>
+                    <div class="alert alert-danger rounded-0" *ngIf="error.ammount" role="alert">
+                      {{ error.ammount }}
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button id="btnEnviar" type="submit" [disabled]="!fCreateRoute.valid || enviando" class="btn float-right btn-primary ">Enviar</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

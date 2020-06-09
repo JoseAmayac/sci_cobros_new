@@ -1,0 +1,156 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- general form elements -->
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title" *ngIf="!aEditar" >Agregar nuevo cliente</h3>
+                <h3 class="card-title" *ngIf="aEditar" >Actualizar información del cliente</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" (ngSubmit)="aEditar ? update() : create()" #fCliente=ngForm >
+                <div class="card-body mb-0">
+
+                    <!-- Input para ingresar el dni del cliente -->
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">DNI del cliente</label>
+                    <input type="text" name="dni" #dni=ngModel [(ngModel)]="client.dni" class="form-control" id="exampleInputEmail1" minlength="6" placeholder="DNI" autocomplete="off" 
+                    [ngClass]="{'is-invalid':dni.invalid && (dni.dirty || dni.touched) || error.dni, 'is-valid':dni.valid && !error.dni }" required>
+
+                    <div *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+                        <div class="invalid-feedback"  *ngIf="dni.errors.required">
+                            Por favor ingrese el número de identificación del cliente
+                        </div>
+
+                        <div class="invalid-feedback"  *ngIf="dni.errors.minlength">
+                            El número de identificación debe contener al menos 6 caracteres
+                        </div>
+                    </div>
+
+                    <div class="valid-feedback" [hidden]="!dni.valid || error.dni">
+                        Se ve bien!
+                    </div>  
+
+                    <div class="alert alert-danger rounded-0" *ngIf="error.dni" role="alert">
+                        {{ error.dni }}
+                    </div>
+                    </div>
+
+                    <!-- Input para ingresar los nombres del cliente -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombres del cliente</label>
+                        <input type="text" name="name" #name=ngModel [(ngModel)]="client.name" class="form-control" id="exampleInputEmail1" minlength="3" placeholder="Nombres" autocomplete="off" 
+                        [ngClass]="{'is-invalid':name.invalid && (name.dirty || name.touched) || error.name, 'is-valid':name.valid && !error.name }" required>
+    
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                            <div class="invalid-feedback"  *ngIf="name.errors.required">
+                                Por favor ingrese el nombre completo del cliente
+                            </div>
+    
+                            <div class="invalid-feedback"  *ngIf="name.errors.minlength">
+                                El nombre del cliente debe contener al menos 3 caracteres
+                            </div>
+                        </div>
+    
+                        <div class="valid-feedback" [hidden]="!name.valid || error.name">
+                            Se ve bien!
+                        </div>  
+    
+                        <div class="alert alert-danger rounded-0" *ngIf="error.name" role="alert">
+                            {{ error.name }}
+                        </div>
+                    </div>
+
+                    <!-- Input para ingresar los apellidos del cliente -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Apellidos del cliente</label>
+                        <input type="text" name="lastname" #lastname=ngModel [(ngModel)]="client.lastname" class="form-control" id="exampleInputEmail1" minlength="3" placeholder="Apellidos" autocomplete="off" 
+                        [ngClass]="{'is-invalid':lastname.invalid && (lastname.dirty || lastname.touched) || error.lastname, 'is-valid':lastname.valid && !error.lastname }" required>
+    
+                        <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+                            <div class="invalid-feedback"  *ngIf="lastname.errors.required">
+                                Por favor ingrese los apellidos del cliente
+                            </div>
+    
+                            <div class="invalid-feedback"  *ngIf="lastname.errors.minlength">
+                                El apellido del cliente debe contener al menos 3 caracteres
+                            </div>
+                        </div>
+    
+                        <div class="valid-feedback" [hidden]="!lastname.valid || error.lastname">
+                            Se ve bien!
+                        </div>  
+    
+                        <div class="alert alert-danger rounded-0" *ngIf="error.lastname" role="alert">
+                            {{ error.lastname }}
+                        </div>
+                    </div>
+
+                    <!-- Input para ingresar el número de celular del cliente -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Número de celular del cliente</label>
+                        <input type="text" name="cellphone" #cellphone=ngModel [(ngModel)]="client.cellphone" class="form-control" id="exampleInputEmail1" minlength="6" placeholder="Número de celular" autocomplete="off" 
+                        [ngClass]="{'is-invalid':cellphone.invalid && (cellphone.dirty || cellphone.touched) || error.cellphone, 'is-valid':cellphone.valid && !error.cellphone }" required>
+    
+                        <div *ngIf="cellphone.invalid && (cellphone.dirty || cellphone.touched)">
+                            <div class="invalid-feedback"  *ngIf="cellphone.errors.required">
+                                Por favor ingrese el número de celular del cliente
+                            </div>
+    
+                            <div class="invalid-feedback"  *ngIf="cellphone.errors.minlength">
+                                El número de celular del cliente debe contener al menos 6 caracteres
+                            </div>
+                        </div>
+    
+                        <div class="valid-feedback" [hidden]="!cellphone.valid || error.cellphone">
+                            Se ve bien!
+                        </div>  
+    
+                        <div class="alert alert-danger rounded-0" *ngIf="error.cellphone" role="alert">
+                            {{ error.cellphone }}
+                        </div>
+                    </div>
+
+                    <!-- Input para ingresar la dirección del cliente -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Dirección del cliente</label>
+                        <input type="text" name="address" #address=ngModel [(ngModel)]="client.address" class="form-control" id="exampleInputEmail1" minlength="5" placeholder="Dirección" autocomplete="off" 
+                        [ngClass]="{'is-invalid':address.invalid && (address.dirty || address.touched) || error.address, 'is-valid':address.valid && !error.address }" required>
+    
+                        <div *ngIf="address.invalid && (address.dirty || address.touched)">
+                            <div class="invalid-feedback"  *ngIf="address.errors.required">
+                                Por favor ingrese la dirección del cliente
+                            </div>
+    
+                            <div class="invalid-feedback"  *ngIf="address.errors.minlength">
+                                La dirección del cliente debe contener al menos 5 caracteres
+                            </div>
+                        </div>
+    
+                        <div class="valid-feedback" [hidden]="!address.valid || error.address">
+                            Se ve bien!
+                        </div>  
+    
+                        <div class="alert alert-danger rounded-0" *ngIf="error.address" role="alert">
+                            {{ error.address }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button id="btnEnviar" type="submit" [disabled]="!fCliente.valid || enviando" class="btn float-right btn-primary ">
+                      <span *ngIf="!aEditar" >
+                          Crear cliente
+                      </span>
+                      <span *ngIf="aEditar" >
+                        Actualizar información
+                      </span>
+                  </button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

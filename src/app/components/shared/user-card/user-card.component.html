@@ -1,0 +1,32 @@
+<div class="card w-100 bg-light border rounded-0">
+  <div class="card-header text-muted border-bottom-0"  >
+    <small>
+      Cliente desde {{ usuario.created_at|date }}
+    </small>
+  </div>
+  <div class="card-body pt-0">
+    <div class="row">
+      <div class="col-7">
+        <h2 class="lead"><b>{{ usuario.name }} {{ usuario.lastname }}</b></h2>
+
+        <p class="text-muted text-sm"><b>DNI: </b> {{ usuario.dni }}</p>
+        <p *ngIf="usuario.route"  class="text-muted text-sm"><b>Ruta asignada: </b> {{ usuario.route.name }}</p>
+        
+        <ul class="ml-4 mb-0 fa-ul text-muted">
+          <li class="small my-2"><span class="fa-li"><i class="fa fa-lg fa-building"></i></span> Dirección: {{ usuario.address }}</li>
+
+          <li class="small"><span class="fa-li"><i class="fa fa-lg fa-phone"></i></span> Celular: {{ usuario.cellphone }}</li>
+
+        </ul>
+      </div>
+      <div class="col-5 text-center">
+        <img src="assets/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+      <a href="#" class="btn btn-sm bg-teal">
+        <i class="fa fa-user"></i> Ver en detalle
+      </a>
+  </div>
+</div>

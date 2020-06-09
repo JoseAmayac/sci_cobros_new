@@ -1,0 +1,3 @@
+<section class="content mx-md-3 mx-0 " *ngIf="(employees|async) as usuarios">
+    <app-user-list [usuarios]="usuarios['employees']"></app-user-list>
+  </section>

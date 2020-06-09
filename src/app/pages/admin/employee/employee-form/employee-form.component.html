@@ -1,0 +1,315 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- general form elements -->
+            <div class="card card-dark">
+              <div class="card-header d-flex">
+                <h4 class="d-inline"  >Agregar nuevo cobrador</h4>
+                <!-- <h3 class="card-title" *ngIf="aEditar" >Actualizar información del cliente</h3> -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row mb-4 ">
+                  <div class="col">
+                    <h3 class="paso_titulo animate__animated animate__slideInRight" *ngIf="step == 0" >
+                      Información personal
+                    </h3>
+                    <h3 class="paso_titulo animate__animated animate__slideInRight" *ngIf="step == 1" >
+                      Datos de acceso
+                    </h3>
+                    <h3 class="paso_titulo animate__animated animate__slideInRight" *ngIf="step == 2" >
+                      Resumen
+                    </h3>
+                    <span class="text-right text-muted">
+                      Paso {{ step+1 }}/3
+                    </span>
+                  </div>
+                </div>
+
+                <!-- form start -->
+                <section *ngIf="step == 0" >
+                  <form id="formWizard" class="animate__animated animate__slideInRight" #fFirstStepForm=ngForm>
+                    <!-- Inputs para el nombre y apellido del cobrador -->
+
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="exampleInputEmail2">Nombres del cobrador</label>
+                        <input type="text" name="name" [(ngModel)]="employee.name" #name=ngModel
+                        [ngClass]="{'is-invalid':name.invalid && (name.dirty || name.touched) || error.name, 'is-valid':name.valid && !error.name }"
+                        class="form-control" id="exampleInputEmail2" minlength="5" placeholder="Nombres" autocomplete="off" required>
+
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                          <div class="invalid-feedback"  *ngIf="name.errors.required">
+                              Por favor ingrese el nombre completo del cobrador
+                          </div>
+
+                          <div class="invalid-feedback"  *ngIf="name.errors.minlength">
+                              El nombre del cobrador debe contener al menos 5 caracteres
+                          </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!name.valid || error.name">
+                            Se ve bien!
+                        </div>  
+
+                        <div class="alert alert-danger rounded-0" *ngIf="error.name" role="alert">
+                            {{ error.name }}
+                        </div>
+                      </div>
+                      <div class="col">
+                        <label for="exampleInputEmail2">Apellidos del cobrador</label>
+                        <input type="text" name="lastname" [(ngModel)]="employee.lastname" #lastname=ngModel
+                        [ngClass]="{'is-invalid':lastname.invalid && (lastname.dirty || lastname.touched) || error.lastname, 'is-valid':lastname.valid && !error.lastname }"
+                        class="form-control" id="exampleInputEmail2" minlength="5" placeholder="Apellidos" autocomplete="off" required>
+
+                        <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+                          <div class="invalid-feedback"  *ngIf="lastname.errors.required">
+                              Por favor ingrese los apellidos del cobrador
+                          </div>
+
+                          <div class="invalid-feedback"  *ngIf="lastname.errors.minlength">
+                              El apellido del cobrador debe contener al menos 5 caracteres
+                          </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!lastname.valid || error.lastname">
+                            Se ve bien!
+                        </div>  
+
+                        <div class="alert alert-danger rounded-0" *ngIf="error.lastname" role="alert">
+                            {{ error.lastname }}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Inputs para el dni y el número de telefono del cobrador -->
+                    <div class="form-row my-3">
+                      <div class="col">
+                        <label for="exampleInputEmail3">DNI del cobrador</label>
+                        <input type="text" name="dni" [(ngModel)]="employee.dni" #dni=ngModel
+                        [ngClass]="{'is-invalid':dni.invalid && (dni.dirty || dni.touched) || error.dni, 'is-valid':dni.valid && !error.dni }"
+                        class="form-control" id="exampleInputEmail3" minlength="6" placeholder="DNI" autocomplete="off" required>
+
+                        <div *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+                          <div class="invalid-feedback"  *ngIf="dni.errors.required">
+                              Por favor ingrese el número de identificación del cobrador
+                          </div>
+
+                          <div class="invalid-feedback"  *ngIf="dni.errors.minlength">
+                              El número de identificación debe contener al menos 6 caracteres
+                          </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!dni.valid || error.dni">
+                            Se ve bien!
+                        </div>  
+
+                        <div class="alert alert-danger rounded-0" *ngIf="error.dni" role="alert">
+                            {{ error.dni }}
+                        </div>
+                      </div>
+                      <div class="col">
+                        <label for="exampleInputEmail2">Número de celular <span class="d-md-inline d-none">del cobrador</span> </label>
+                        <input type="text" name="cellphone" [(ngModel)]="employee.cellphone" #cellphone=ngModel
+                        [ngClass]="{'is-invalid':cellphone.invalid && (cellphone.dirty || cellphone.touched) || error.cellphone, 'is-valid':cellphone.valid && !error.cellphone }"
+                        class="form-control" id="exampleInputEmail2" minlength="6" placeholder="Número de celular" autocomplete="off" required>
+
+                        <div *ngIf="cellphone.invalid && (cellphone.dirty || cellphone.touched)">
+                          <div class="invalid-feedback"  *ngIf="cellphone.errors.required">
+                              Por favor ingrese el número de celular del cobrador
+                          </div>
+
+                          <div class="invalid-feedback"  *ngIf="cellphone.errors.minlength">
+                              El número de celular debe contener al menos 6 caracteres
+                          </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!cellphone.valid || error.cellphone">
+                            Se ve bien!
+                        </div>  
+
+                        <div class="alert alert-danger rounded-0" *ngIf="error.cellphone" role="alert">
+                            {{ error.cellphone }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Input para la dirección del cobrador -->
+                    <div class="form-row my-3">
+                      <div class="col">
+                        <label for="exampleInputEmail2">Dirección <span class="d-md-inline d-none">del cobrador</span> </label>
+                        <input type="text" name="address" [(ngModel)]="employee.address" #address=ngModel
+                        [ngClass]="{'is-invalid':address.invalid && (address.dirty || address.touched) || error.address, 'is-valid':address.valid && !error.address }"
+                        class="form-control" id="exampleInputEmail2" placeholder="Dirección" autocomplete="off" required>
+
+                        <div *ngIf="address.invalid && (address.dirty || address.touched)">
+                          <div class="invalid-feedback"  *ngIf="address.errors.required">
+                              Por favor ingrese la dirección del cobrador
+                          </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!address.valid || error.address">
+                            Se ve bien!
+                        </div>  
+
+                        <div class="alert alert-danger rounded-0" *ngIf="error.address" role="alert">
+                            {{ error.address }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group d-flex">
+                      <button type="button" (click)="siguiente('Datos de acceso')" class="btn btn-flat btn-primary ml-auto" [disabled]="!fFirstStepForm.valid">
+                        Siguiente
+                      </button>
+                    </div>
+                  </form>
+                </section>
+
+                <section  *ngIf="step == 1" >
+                  <form #fSecondStepForm=ngForm class="animate__animated animate__slideInRight">
+                    <div class="form-group">
+                      <label for="exampleInputEmail2">Nombre de usuario <span class="d-md-inline d-none">del cobrador</span> </label>
+                      <input type="text" name="username" [(ngModel)]="employee.username" #username=ngModel
+                      [ngClass]="{'is-invalid':username.invalid && (username.dirty || username.touched) || error.username, 'is-valid':username.valid && !error.username }"
+                      class="form-control" id="exampleInputusername2"  placeholder="Nombre de usuario" autocomplete="off" required>
+
+                      <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                        <div class="invalid-feedback"  *ngIf="username.errors.required">
+                            Por favor ingrese el correo electrónico del cobrador
+                        </div>
+                      </div>
+
+                      <div class="valid-feedback" [hidden]="!username.valid || error.username">
+                          Se ve bien!
+                      </div>  
+
+                      <div class="alert alert-danger rounded-0" *ngIf="error.username" role="alert">
+                          {{ error.username }}
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail2">Contraseña de acceso <span class="d-md-inline d-none">del cobrador</span> </label>
+                      <input type="password" name="password" [(ngModel)]="employee.password" #password=ngModel
+                      [ngClass]="{'is-invalid':password.invalid && (password.dirty || password.touched) || error.password, 'is-valid':password.valid && !error.password }"
+                      class="form-control" id="exampleInputpassword2"  minlength="6" placeholder="Contraseña de acceso" autocomplete="off" required>
+
+                      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <div class="invalid-feedback"  *ngIf="password.errors.required">
+                            Por favor ingrese la contraña de acceso del cobrador
+                        </div>
+                        {{ password.errors.password }}
+                        <div class="invalid-feedback"  *ngIf="password.errors.minlength">
+                          La contraseña de acceso debe contener al menos 6 caracteres
+                        </div>
+                      </div>
+
+                      <div class="valid-feedback" [hidden]="!password.valid || error.password">
+                          Se ve bien!
+                      </div>  
+
+                      <div class="alert alert-danger rounded-0" *ngIf="error.password" role="alert">
+                          {{ error.password }}
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail2">Confirme la contraseña <span class="d-md-inline d-none">del cobrador</span> </label>
+                      <input type="password" name="password_confirmation" [(ngModel)]="employee.password_confirmation" #password_confirmation=ngModel minlength="6"
+                      [ngClass]="{'is-invalid':password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched) || error.password_confirmation, 'is-valid':password_confirmation.valid && !error.password_confirmation }"
+                      class="form-control" id="exampleInputpassword_confirmation2"  placeholder="Confirme la contraseña" autocomplete="off" required>
+
+                      <div *ngIf="password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched)">
+                        <div class="invalid-feedback"  *ngIf="password_confirmation.errors.required">
+                          Por favor confirme la contraseña de acceso del cobrador
+                        </div>
+                        {{ password_confirmation.errors.password_confirmation }}
+                        <div class="invalid-feedback"  *ngIf="password_confirmation.errors.minlength">
+                          La confirmación de contraseña debe contener al menos 6 caracteres
+                        </div>
+                      </div>
+
+                      <div class="valid-feedback" [hidden]="!password_confirmation.valid || error.password_confirmation">
+                          Se ve bien!
+                      </div>  
+
+                      <div class="alert alert-danger rounded-0" *ngIf="error.password_confirmation" role="alert">
+                          {{ error.password_confirmation }}
+                      </div>
+                    </div>
+
+
+                    <div class="form-group d-flex">
+                      <button type="button" (click)="step = step-1" class="btn btn-flat btn-outline-primary mr-auto">
+                        Atras
+                      </button>
+                      <button type="button" [disabled]="!fSecondStepForm.valid" (click)="siguiente('Resumen')" class="btn btn-flat btn-primary ml-auto">
+                        Siguiente
+                      </button>
+                    </div>
+                  </form>
+                </section>
+
+                <section  *ngIf="step == 2" class="animate__animated animate__slideInRight" >
+                  <div class="card card-primary ">
+                    <div class="card-body">
+                      <strong>
+                        <i class="fa fa-user"></i>
+                        Nombres:
+                      </strong>
+                      <span>{{ employee.name }}</span>
+                      <br>
+                      <hr>
+                      <strong>
+                        <i class="fa fa-user"></i>
+                        Apellidos:
+                      </strong>
+                      <span>{{ employee.lastname }}</span>
+                      <br>
+                      <hr>
+                      <strong>
+                        <i class="fa fa-id-card-o"></i>
+                        DNI:
+                      </strong>
+                      <span>{{ employee.dni }}</span>
+                      <br>
+                      <hr>
+                      <strong>
+                        <i class="fa fa-phone"></i>
+                        Celular:
+                      </strong>
+                      <span>{{ employee.cellphone }}</span>
+                      <br>
+                      <hr>
+                      <strong>
+                        <i class="fa fa-building"></i>
+                        Dirección:
+                      </strong>
+                      <span>{{ employee.address }}</span>
+                      <br>
+                      <hr>
+                      <strong>
+                        <i class="fa fa-envelope"></i>
+                        Nombre de usuario:
+                      </strong>
+                      <span>{{ employee.username }}</span>
+                      <br>
+                      <hr>
+                    </div>
+                  </div>
+                  <div class="form-group d-flex">
+                    <button type="button" (click)="step = step-1" class="btn btn-flat btn-outline-primary mr-auto">
+                      Atras
+                    </button>
+                    <button type="button" [disabled]="enviando" id="btnCrearCobrador" (click)="create()" class="btn btn-flat btn-primary ml-auto">
+                      Crear cobrador
+                    </button>
+                  </div>
+                </section>
+              </div>
+              
+            </div>
+        </div>
+    </div>
+</div>

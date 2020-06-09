@@ -1,0 +1,60 @@
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-md-5 mx-auto mt-5 my-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" #signupForm=ngForm (ngSubmit)="register()">
+                        <h1 class="text-center font-weight-bold">Crea una cuenta</h1>
+        
+                        <div class="wrap-input100 my-4">
+                            <input type="text" class="input100" name="name" id="name" [(ngModel)]="user.name" (blur)="addClass()" required>
+                            <span class="focus-input100" data-placeholder="Nombres"></span>
+                        </div>
+                        <div class="wrap-input100 my-4">
+                            <input type="text" class="input100" (blur)="addClass()" name="lastname" id="lastname" [(ngModel)]="user.lastname" required>
+                            <span class="focus-input100" data-placeholder="Apellidos"></span>
+                        </div>
+                        <div class="wrap-input100 mt-4">
+                            <input type="email" (blur)="addClass()" class="input100" name="email" id="email" [(ngModel)]="user.email" required>
+                            <span class="focus-input100" data-placeholder="Correo electronico"></span>
+                        </div>
+                        <div class="alert alert-danger" [hidden]="!error.email">
+                            <span>{{ error.email }}</span>
+                        </div>
+            
+                        <div class="wrap-input100 mt-4">
+                            <input type="password" (blur)="addClass()" name="password" id="password" class="input100" [(ngModel)]="user.password" required>
+                            <span class="focus-input100" data-placeholder="Cree una contraseña"></span>
+                        </div>
+                        <div class="alert alert-danger" [hidden]="!error.password">
+                            <span>{{ error.password }}</span>
+                        </div>
+                        <div class="wrap-input100 my-4">
+                            <input type="password" (blur)="addClass()" name="password_confirmation" id="password_confirmation" class="input100" [(ngModel)]="user.password_confirmation" required>
+                            <span class="focus-input100" data-placeholder="Confirme la contraseña"></span>
+                        </div>
+                        
+                        <button class="btn btn-success btn-block boton my-4 p-2" [disabled]="!signupForm.form.valid">                    
+                            Registrarse
+                        </button>
+        
+                    </form>
+                    <ul class="login-more p-t-190">
+        
+                        <li>
+                            <span class="txt1">
+                                ¿Ya es miembro?
+                            </span>
+        
+                            <a routerLink="/login" class="txt2">
+                                Inicie sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,11 @@
+<!-- Default box -->
+<div class="card card-solid" *ngIf="usuarios" >
+    <div class="card-body pb-0">
+      <div class="row d-flex ">
+        <div *ngFor="let usuario of usuarios" class="col-12 col-sm-6 col-md-4 ">
+          <app-user-card class="w-100" [usuario]="usuario" ></app-user-card>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- /.card -->

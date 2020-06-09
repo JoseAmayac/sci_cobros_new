@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-dark">
+          <h4 class="text-center" >Lista total de rutas creadas</h4>
+        </div>
+        <div class="card-body px-2">
+          <table  id="example2" datatable [dtOptions]="dtOptions" *ngIf="(routes|async) as rutas"  class="table table-hover">
+            <thead class="text-center">
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Monto asignado</th>
+                <th>Creada en</th>
+                <th class="d-none"></th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr *ngFor="let route of (rutas['routes']);index as index"  (mouseover)="row = index" (mouseleave)="row = -1">
+                <td>{{ route.id }}</td>
+                <td>{{ route.name }}</td>
+                <td>{{ route.ammount }}</td>
+                <td>{{ route.created_at|date }}</td>
+                <td [ngClass]="{'width-13':row == index}">
+                  <div class="w-50 mx-auto" *ngIf="row == index">
+                    <a routerLink="edit/{{ route.id }}" class="btn btn-info">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                    <button class="btn btn-danger ml-2" (click)="destroy(route.id)">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>  
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
