@@ -42,8 +42,9 @@
               "src/assets/css/adminlte.min.css"
             ],
             "scripts": [
-              "src/assets/plugins/jquery/jquery.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
               "src/assets/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "node_modules/jquery-ui/ui/widgets/datepicker.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "src/assets/plugins/daterangepicker/daterangepicker.js",
               "src/assets/plugins/chart.js/Chart.min.js",

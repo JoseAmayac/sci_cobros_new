@@ -4,7 +4,6 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { NgxSpinnerModule } from 'ngx-spinner'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -24,7 +23,6 @@ registerLocaleData(es);
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxSpinnerModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       maxOpened:1,

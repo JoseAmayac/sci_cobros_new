@@ -15,6 +15,15 @@ export interface User {
     username?:string
 }
 
+export interface Vehicle{
+    id?:number,
+    license_plate?: string,
+    mark?: string,
+    model?: number,
+    cylindering?: number,
+    papers_due_date?: Date
+}
+
 export interface Role{
     id?:number,
     name?:string,

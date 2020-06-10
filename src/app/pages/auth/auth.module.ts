@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { NgxSpinnerModule } from 'ngx-spinner'
 import { AuthRoutingModule } from './aut-routing.module';
 
 import { FormsModule } from '@angular/forms'
@@ -21,7 +22,8 @@ import { ResetPasswordComponent } from './password/reset-password/reset-password
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ]
 })
 export class AuthModule { }

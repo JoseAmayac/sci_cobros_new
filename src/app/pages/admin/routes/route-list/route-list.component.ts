@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Route } from 'src/app/interfaces/interfaces';
 
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner'
 
 import { Observable, throwError } from 'rxjs';
 import { RoutesService } from 'src/app/services/admin/routes.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { UiService } from 'src/app/services/ui/ui.service';
 
 @Component({
@@ -26,7 +27,9 @@ export class RouteListComponent implements OnInit {
 
   //Determina la fila en la que se está realizando hover 
   row = -1;
-  constructor(private routeService:RoutesService, private uiService:UiService) { }
+  constructor(private routeService:RoutesService, 
+              private uiService:UiService,
+              private spinner:NgxSpinnerService) { }
 
 
   ngOnInit() {
@@ -44,8 +47,13 @@ export class RouteListComponent implements OnInit {
   }
 
   index(){
+    this.spinner.show()
     this.routes = this.routeService.index().pipe(
+      tap(data=>{
+        this.spinner.hide()
+      }),
       catchError(err=>{
+        this.spinner.hide()
         this.error = err;
         return throwError(err)
       })

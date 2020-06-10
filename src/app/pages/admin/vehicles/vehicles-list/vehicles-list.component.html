@@ -1,0 +1,49 @@
+<div class="container-fluid h-100">
+    <div class="row">
+      <div class="col-12">
+        <div class="card" *ngIf="(vehicles|async) as vehiculos;else loading">
+          <div class="card-header bg-dark">
+            <h4 class="text-center" >Lista total de vehículos</h4>
+          </div>
+          <div class="card-body px-2">
+            <table  id="example2" datatable [dtOptions]="dtOptions"  class="table table-hover">
+              <thead class="text-center">
+                <tr>
+                  <th>Placa</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Cilindraje</th>
+                  <th>Vencimiento papeles</th>
+                  <th class="d-none"></th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr *ngFor="let vehicle of vehiculos['vehicles'];index as index"  (mouseover)="row = index" (mouseleave)="row = -1">
+                  <td>{{ vehicle.license_plate }}</td>
+                  <td>{{ vehicle.mark }}</td>
+                  <td>{{ vehicle.model }}</td>
+                  <td>{{ vehicle.cylindering }}</td>
+                  <td>{{ vehicle.papers_due_date }}</td>
+                  <td [ngClass]="{'width-13':row == index}">
+                    <div class="w-50 mx-auto" *ngIf="row == index">
+                      <a routerLink="edit/{{ vehicle.id }}" class="btn btn-info">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <button class="btn btn-danger ml-2" (click)="destroy(vehicle.id)">
+                        <i class="fa fa-trash-o"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>  
+            </table>
+          </div>
+        </div>
+        <ng-template #loading>
+          <div class="card bg-dark">
+            
+          </div>
+        </ng-template>
+      </div>
+    </div>
+</div>

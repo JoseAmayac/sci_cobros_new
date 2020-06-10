@@ -3,6 +3,10 @@ body{
     height: 100vh !important;
 }
 
+.invalid-feedback{
+    display: block !important;
+}
+
 .login100-form-avatar {
     display: block;
     width: 120px;

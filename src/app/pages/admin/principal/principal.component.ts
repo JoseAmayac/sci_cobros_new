@@ -48,7 +48,7 @@ export class PrincipalComponent implements OnInit {
         {
           title:'Agregar vehículo',
           icon:'fa fa-plus-circle',
-          redirectTo:'vehicles/new'
+          redirectTo:'vehicles/create'
         }
       ]
     },

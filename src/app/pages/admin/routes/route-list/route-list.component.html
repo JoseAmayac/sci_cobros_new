@@ -1,12 +1,12 @@
-<div class="container-fluid">
+<div class="container-fluid h-100">
   <div class="row">
     <div class="col-12">
-      <div class="card">
+      <div class="card" *ngIf="(routes|async) as rutas;else loading">
         <div class="card-header bg-dark">
           <h4 class="text-center" >Lista total de rutas creadas</h4>
         </div>
         <div class="card-body px-2">
-          <table  id="example2" datatable [dtOptions]="dtOptions" *ngIf="(routes|async) as rutas"  class="table table-hover">
+          <table  id="example2" datatable [dtOptions]="dtOptions"  class="table table-hover">
             <thead class="text-center">
               <tr>
                 <th>ID</th>
@@ -37,6 +37,11 @@
           </table>
         </div>
       </div>
+      <ng-template #loading>
+        <div class="card bg-dark">
+          
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -1,0 +1,136 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- general form elements -->
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title" *ngIf="!aEditar" >Agregar nuevo vehículo</h3>
+                <h3 class="card-title" *ngIf="aEditar" >Actualizar información del vehículo</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" (ngSubmit)="aEditar ? update() : create()" #fVehicle=ngForm >
+                <div class="card-body">
+                    <!-- Placa del vehículo -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Placa del vehículo</label>
+                        <input type="text" name="license_plate" #license_plate=ngModel [(ngModel)]="vehicle.license_plate" class="form-control" id="exampleInputEmail1" minlength="3" placeholder="Placa" autocomplete="off" 
+                        [ngClass]="{'is-invalid':license_plate.invalid && (license_plate.dirty || license_plate.touched) || error.license_plate, 'is-valid':license_plate.valid && !error.license_plate }" required>
+
+                        <div *ngIf="license_plate.invalid && (license_plate.dirty || license_plate.touched)">
+                            <div class="invalid-feedback"  *ngIf="license_plate.errors.required">
+                                Por favor ingrese la placa del vehículo
+                            </div>
+
+                            <div class="invalid-feedback"  *ngIf="license_plate.errors.minlength">
+                                La placa del vehículo debe contener al menos 3 caracteres
+                            </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!license_plate.valid || error.license_plate">
+                            Se ve bien!
+                        </div>  
+
+                        <div class="alert alert-danger rounded-0" *ngIf="error.license_plate" role="alert">
+                        {{ error.license_plate }}
+                        </div>
+
+                    </div>
+
+                    <!-- Marca del vehículo -->
+                    <div class="form-group ">
+                        <label for="exampleInputPassword2">Marca del vehículo</label>
+                        <input #mark=ngModel type="text" name="mark" [(ngModel)]="vehicle.mark" class="form-control" id="exampleInputPassword2" autocomplete="off" placeholder="Marca"
+                        [ngClass]="{'is-invalid':mark.invalid && (mark.dirty || mark.touched) || error.mark,  'is-valid':mark.valid && !error.mark }" required>
+
+                        <div *ngIf="mark.invalid && (mark.dirty || mark.touched)">
+                            <div class="invalid-feedback"  *ngIf="mark.errors.required">
+                                Por favor ingrese la marca del vehículo
+                            </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!mark.valid || error.mark">
+                            Se ve bien!
+                        </div>
+                        <div class="alert alert-danger rounded-0" *ngIf="error.mark" role="alert">
+                        {{ error.mark }}
+                        </div>
+                    </div>
+
+                    <!-- Modelo del vehículo -->
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">Modelo del vehículo</label>
+                        <input #model=ngModel  type="number" autocomplete="off" name="model" [(ngModel)]="vehicle.model" class="form-control" id="exampleInputPassword2" placeholder="Modelo"
+                        [ngClass]="{'is-invalid':model.invalid && (model.dirty || model.touched) || error.model,  'is-valid':model.valid && !error.model }" required>
+
+                        <div *ngIf="model.invalid && (model.dirty || model.touched)">
+                            <div class="invalid-feedback"  *ngIf="model.errors.required">
+                                Por favor ingrese el modelo del vehículo
+                            </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!model.valid || error.model">
+                            Se ve bien!
+                        </div>
+                        <div class="alert alert-danger rounded-0" *ngIf="error.model" role="alert">
+                        {{ error.model }}
+                        </div>
+                    </div>
+
+                    <!-- Cilindraje del vehículo -->
+                    <div class="form-group ">
+                        <label for="exampleInputPassword4">Cilindraje del vehículo</label>
+                        <input autocomplete="off" #cylindering=ngModel type="number" name="cylindering" [(ngModel)]="vehicle.cylindering" class="form-control" id="exampleInputPassword4" placeholder="Cilindraje"
+                        [ngClass]="{'is-invalid':cylindering.invalid && (cylindering.dirty || cylindering.touched) || error.cylindering,  'is-valid':cylindering.valid && !error.cylindering }" required>
+
+                        <div *ngIf="cylindering.invalid && (cylindering.dirty || cylindering.touched)">
+                            <div class="invalid-feedback"  *ngIf="cylindering.errors.required">
+                                Por favor ingrese el cilindraje del vehículo
+                            </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!cylindering.valid || error.cylindering">
+                            Se ve bien!
+                        </div>
+                        <div class="alert alert-danger rounded-0" *ngIf="error.cylindering" role="alert">
+                            {{ error.cylindering }}
+                        </div>
+                    </div>
+
+                    <!-- Fecha de vencimiento del seguro -->
+                    <div class="form-group ">
+                        <label for="exampleInputPassword4">Fecha vencimiento de los papeles del vehículo</label>
+                        <input autocomplete="off" #papers_due_date=ngModel type="date" name="papers_due_date" [(ngModel)]="vehicle.papers_due_date" class="form-control" id="exampleInputPassword4" placeholder="Vecimiento de papeles "
+                        [ngClass]="{'is-invalid':papers_due_date.invalid && (papers_due_date.dirty || papers_due_date.touched) || error.papers_due_date,  'is-valid':papers_due_date.valid && !error.papers_due_date }" required>
+
+                        <div *ngIf="papers_due_date.invalid && (papers_due_date.dirty || papers_due_date.touched)">
+                            <div class="invalid-feedback"  *ngIf="papers_due_date.errors.required">
+                                Por favor ingrese la fecha de vencimiento de los papeles del vehículo
+                            </div>
+                        </div>
+
+                        <div class="valid-feedback" [hidden]="!papers_due_date.valid || error.papers_due_date">
+                            Se ve bien!
+                        </div>
+                        <div class="alert alert-danger rounded-0" *ngIf="error.papers_due_date" role="alert">
+                            {{ error.papers_due_date }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button id="btnEnviar" type="submit" [disabled]="!fVehicle.valid || enviando" class="btn float-right btn-primary ">
+                      <span *ngIf="aEditar" >
+                        Actualizar información
+                      </span>
+                      <span *ngIf="!aEditar" >
+                        Crear vehículo
+                      </span>
+                  </button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
