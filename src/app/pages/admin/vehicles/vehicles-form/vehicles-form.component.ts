@@ -47,7 +47,10 @@ export class VehiclesFormComponent implements OnInit {
   }
 
   handleErrorEdit(error){
-
+    if (error.status === 404) {
+      this.router.navigateByUrl('/dashboard/vehicles');
+      this.uiService.showErrorMessage('No encontramos ningún vehículo con ese identificador');
+    }
   }
 
   update(){

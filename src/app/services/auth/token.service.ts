@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
-  token:string = "";
+  token:string = null;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   async createToken(token)
   {
@@ -16,10 +17,13 @@ export class TokenService {
 
   async getToken()
   {
-    return this.token =  await localStorage.getItem('token');
+    this.token =  await localStorage.getItem('token') || null;
+
+    return this.token;
   }
 
   async clearStorage(){
+    this.token = null;
     await localStorage.clear()
   }
 }

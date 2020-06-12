@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
               ) { }
 
   ngOnInit() {
+    this.spinner.hide()
     this.title.setTitle('Iniciar sesión');
   }
 
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
     this.token.createToken(data.access_token);
 
     if (data.user.role.name === 'admin') {
-      this.router.navigateByUrl('/dashboard')
+      this.router.navigateByUrl('/payment')
     } else {
       this.router.navigateByUrl('/employee')
     }

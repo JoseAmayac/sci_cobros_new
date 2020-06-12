@@ -44,7 +44,7 @@ export class AuthInterceptorService implements HttpInterceptor{
                 filter(result => result !== null),
                 take(1),
                 switchMap((res) => {
-                    return next.handle(this.injectToken(request))
+                  return next.handle(this.injectToken(request))
                 })
               );
             }
@@ -52,6 +52,11 @@ export class AuthInterceptorService implements HttpInterceptor{
             if (err.status === 401 && error.error.err === 'token_invalid') {
               this.authService.logoutAlternative(false);
               return next.handle(this.injectToken(request))
+            }else{
+              if (err.status === 404 && error.error.err === 'token_not_found') {
+                this.authService.logoutAlternative(false);
+                return next.handle(this.injectToken(request))
+              }
             }
           }
           return throwError(err)

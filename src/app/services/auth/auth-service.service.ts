@@ -5,6 +5,7 @@ import { User } from 'src/app/interfaces/interfaces';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
+import { UiService } from '../ui/ui.service';
 
 const url = environment.url
 
@@ -17,7 +18,8 @@ export class AuthService {
 
   constructor(private http:HttpClient, 
               private tokenService:TokenService,
-              private router:Router) { }
+              private router:Router,
+              private uiService:UiService) { }
 
 
   login(data){
@@ -47,25 +49,26 @@ export class AuthService {
     return this.http.get(`${url}/refresh`)
   }
 
-  async logoutAlternative(acabada:boolean){
+  async logoutAlternative(acabada:boolean,validate?:boolean){
     await this.tokenService.getToken()
     this.tokenService.token = null;
     this.usuario = null;
     await this.tokenService.clearStorage()
 
     if (acabada) {
-      // this.uiService.mostrarSesionAcabada('Tú sesión ha caducado, vuelve a iniciar sesión para continuar')
+      this.uiService.showInfoMessage('Tú sesión ha caducado, vuelve a iniciar sesión para continuar','Sesión caducada')
     } else {
-      // this.uiService.mostrarSesionAcabada('Algo salió mal con tu sesión actual, por favor ingresa nuevamente')
+      if (!validate) {
+        this.uiService.showWarningMessage('Algo salió mal con tu sesión actual, por favor ingresa nuevamente')
+      }
     }
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/auth/login')
   }
 
   async validateToken(){
     let token = await this.tokenService.getToken();
-
     if(!token){
-      this.logoutAlternative(false)
+      this.logoutAlternative(false,true)
       return Promise.resolve(false);
     }
     return new Promise<boolean>(resolve=>{
@@ -74,11 +77,25 @@ export class AuthService {
           this.usuario = res
           return resolve(true)
         },
-        err=>{this.logoutAlternative(false);
+        err=>{
+          this.logoutAlternative(false);
           return resolve(false)
         }
       )
 
     });
+  }
+
+  async validateAuthBefore():Promise<boolean>{
+    let token = await this.tokenService.getToken();
+    
+    return new Promise<boolean>(resolve=>{
+      if (token) {
+        this.router.navigateByUrl('/dashboard');
+        resolve(false)
+      } else {
+        resolve(true)
+      }
+    })
   }
 }
