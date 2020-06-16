@@ -20,6 +20,8 @@ import { EmployeeFormComponent } from './employee/employee-form/employee-form.co
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { VehiclesListComponent } from './vehicles/vehicles-list/vehicles-list.component';
 import { VehiclesFormComponent } from './vehicles/vehicles-form/vehicles-form.component';
+import { ClientsInfoComponent } from './clients/clients-info/clients-info.component';
+import { EmployeeInfoComponent } from './employee/employee-info/employee-info.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { VehiclesFormComponent } from './vehicles/vehicles-form/vehicles-form.co
     EmployeeFormComponent,
     EmployeeListComponent,
     VehiclesListComponent,
-    VehiclesFormComponent
+    VehiclesFormComponent,
+    ClientsInfoComponent,
+    EmployeeInfoComponent
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,7 @@ import { EmployeeListComponent } from './employee/employee-list/employee-list.co
 import { EmployeeFormComponent } from './employee/employee-form/employee-form.component';
 import { VehiclesListComponent } from './vehicles/vehicles-list/vehicles-list.component';
 import { VehiclesFormComponent } from './vehicles/vehicles-form/vehicles-form.component';
+import { ClientsInfoComponent } from './clients/clients-info/clients-info.component';
 
 
 const routes: Routes = [
@@ -54,7 +55,8 @@ const routes: Routes = [
             component:ClientsFormComponent
           },
           {
-            path:'/:id',
+            path:'profile/:id',
+            component:ClientsInfoComponent
           }
         ]
       },

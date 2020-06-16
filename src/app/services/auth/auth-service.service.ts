@@ -52,6 +52,8 @@ export class AuthService {
 
   async getLoggedUser(){
     if (!this.usuario) {
+      console.log('Aquí entre?');
+      
       await this.validateToken()
     }
     return this.usuario;

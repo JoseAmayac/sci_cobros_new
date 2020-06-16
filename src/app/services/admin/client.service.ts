@@ -19,4 +19,8 @@ export class ClientService {
   create(client:User){
     return this.http.post(`${url}/clients`,client);
   }
+
+  show(id){
+    return this.http.get(`${url}/clients/${id}`)
+  }
 }

@@ -13,7 +13,14 @@ export interface User {
     created_at?:Date,
     updated_at?:Date,
     username?:string,
-    state?:number
+    state?:number,
+    photo?:Photo,
+    reputation?:number
+}
+
+export interface Photo{
+    id?:number,
+    route?:string
 }
 
 export interface Vehicle{

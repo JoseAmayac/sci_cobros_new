@@ -1,0 +1,3 @@
+<section class="content" *ngIf="(client|async) as user" >
+    <app-user-info [user]="user"></app-user-info>
+</section>

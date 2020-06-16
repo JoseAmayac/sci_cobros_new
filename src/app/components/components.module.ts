@@ -11,13 +11,15 @@ import { PipesModule } from '../pipes/pipes.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';   
 
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { UserInfoComponent } from './shared/user-info/user-info.component'
 @NgModule({
   declarations: [
     SidebarComponent,
     NavbarComponent,
     UserListComponent,
-    UserCardComponent
+    UserCardComponent,
+    UserInfoComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { FormsModule } from '@angular/forms'
   exports:[
     SidebarComponent,
     NavbarComponent,
-    UserListComponent
+    UserListComponent,
+    UserInfoComponent
   ]
 })
 export class ComponentsModule { }
