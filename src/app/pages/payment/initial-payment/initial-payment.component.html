@@ -1,9 +1,121 @@
-<div class="container">
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-loader" 
+[fullScreen] = "true"><p style="color: white" > Procesando pago... </p></ngx-spinner>
+<div class="container px-0 px-md-2">
+
+    <nav class="navbar navbar-expand-lg shadow navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">SCI</a>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+            <!-- User Account: style can be found in dropdown.less -->
+                <li  class="dropdown user user-menu">
+                    <a class="dropdown-toggle "  data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <img alt="User Image" class="user-image"  src="assets/img/user2-160x160.jpg">
+                        <span class="hidden-xs"   >{{ username }}</span>
+                    </a>
+        
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <!-- User image -->
+                        <li class="user-header p-1 bg-info dropdown-item">
+                        <img alt="User Image" class="img-circle" src="assets/img/user2-160x160.jpg">
+                            <p >
+                                {{ username }} - {{ usuario.role.name }}
+                                <br>
+                                <span>{{ usuario.email || '' }}</span>
+                                <small>Miembro desde {{ usuario.created_at|date: 'mediumDate' : '' : 'es-US' || '' }}</small>
+                            </p>
+                        </li>
+                        
+                        <!-- Menu Footer-->
+                        <li class="user-footer bg-light dropdown-item">
+                        <div class="pull-right">
+                            <button (click)="logout()" class="btn btn-default btn-flat btn-sm" >Cerrar sesión</button>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+            <!-- Control Sidebar Toggle Button -->
+            </ul>
+
+        </div>
+      </nav>
     <div class="row">
-        <div class="col-12">
-            
+        <div class="col-8 mx-auto">
+            <div class="card card-dark my-4 animate__animated animate__fadeIn">
+                <div class="card-header">
+                    <h3 class="text-center">
+                        Finaliza tu proceso
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h3 class="text-center">
+                                    <span class="badge badge-secondary">
+                                        Información del pago
+                                    </span>
+                                </h3>
+                                
+                                <h1 class="text-center">
+                                    $220 USD
+                                </h1>
+                                <small>Pagado a <strong>SciGlobal</strong></small>
+                                <br>
+                                <small>El pago por este valor es generado una unica vez</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col my-3">
+                            <div class="text-center">
+                                <h3 class="text-center">
+                                    <span class="badge badge-secondary">
+                                        Métodos de pago
+                                    </span>
+                                </h3>
+                                <div class="form-group" id="toggler">
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons" data-accordion="false">
+                                        <label class="btn btn-outline-secondary rounded m-2 p-1" data-target="#paypalCollapse"data-toggle="collapse">
+                                            <input type="radio"required>
+                                            <img class="img-thumbnail" src="assets/img/credit/paypal.jpg">
+                                        </label>
+    
+                                        <label class="btn btn-outline-secondary rounded m-2 p-1" data-target="#stripelCollapse"data-toggle="collapse">
+                                            <input type="radio"required>
+                                            <img class="img-thumbnail" src="assets/img/credit/stripe.jpg">
+                                        </label>
+                                    </div>  
+                                    <div class="collapse my-3" id="paypalCollapse" data-parent="#toggler">
+                                        <small>Haga click en el siguiente botón para procesar su pago</small>
+                                        <ngx-paypal [config]="payPalConfig" ></ngx-paypal>
+                                    </div>
+                                    <div class="collapse my-3" id="stripelCollapse" data-parent="#toggler">
+                                        <small>Esta configuración está proxima a ser agregada</small>
+                                        <!-- <ngx-paypal [config]="payPalConfig" ></ngx-paypal> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<ngx-paypal [config]="payPalConfig" ></ngx-paypal>

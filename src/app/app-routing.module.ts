@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthCheckGuard } from './guards/auth-check.guard';
 import { BeforeLoginGuard } from './guards/before-login.guard';
 import { InitialPaymentComponent } from './pages/payment/initial-payment/initial-payment.component';
+import { CheckStatePaymentGuard } from './guards/check-state-payment.guard';
 
 
 const routes: Routes = [
@@ -14,12 +15,15 @@ const routes: Routes = [
   {
     path:'payment',
     loadChildren: ()=>import('./pages/payment/payment.module').then(m=>m.PaymentModule),
-    canLoad:[AuthCheckGuard]
+    canActivate:[AuthCheckGuard]
   },
   {
     path:'dashboard',
     loadChildren: ()=>import('./pages/admin/admin.module').then(m=>m.AdminModule),
-    canLoad:[AuthCheckGuard],
+    canActivate:[AuthCheckGuard],
+    data:{
+      dashboard:true
+    }
   },
   {
     path:'',

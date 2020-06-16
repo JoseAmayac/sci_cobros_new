@@ -6,6 +6,7 @@ import { PaymentRoutingModule } from './payment-routing.module'
 
 import { NgxPayPalModule } from 'ngx-paypal';
 
+import { NgxSpinnerModule } from 'ngx-spinner'
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
   imports: [
     CommonModule,
     PaymentRoutingModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    NgxSpinnerModule
   ]
 })
 export class PaymentModule { }

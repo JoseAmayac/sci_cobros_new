@@ -67,8 +67,15 @@ export class LoginComponent implements OnInit {
     this.spinner.hide();
     this.token.createToken(data.access_token);
 
+    this.service.usuario = data.user;
+
     if (data.user.role.name === 'admin') {
-      this.router.navigateByUrl('/payment')
+      if (data.user.state) {
+        this.router.navigateByUrl('/dashboard')
+      } else {
+        this.router.navigateByUrl('/payment')
+      }
+
     } else {
       this.router.navigateByUrl('/employee')
     }

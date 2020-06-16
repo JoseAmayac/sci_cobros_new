@@ -54,9 +54,10 @@ export class RegisterComponent implements OnInit {
   }
 
   handleResponse(data){
-    this.spinner.hide()
+    this.spinner.hide();
     this.token.createToken(data.access_token);
-    this.router.navigateByUrl('/dashboard');
+    this.service.usuario = data.user;
+    this.router.navigateByUrl('/payment');
   }
 
   handleError(error){

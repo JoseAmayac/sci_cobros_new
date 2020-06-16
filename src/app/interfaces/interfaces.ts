@@ -12,7 +12,8 @@ export interface User {
     route?:Route
     created_at?:Date,
     updated_at?:Date,
-    username?:string
+    username?:string,
+    state?:number
 }
 
 export interface Vehicle{

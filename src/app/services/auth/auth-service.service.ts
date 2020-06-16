@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
 import { UiService } from '../ui/ui.service';
+import { map } from 'rxjs/operators';
+
 
 const url = environment.url
 
@@ -34,6 +36,20 @@ export class AuthService {
     return this.http.get<User>(`${url}/me`)
   }
 
+  refreshUser(){
+    this.getUser().subscribe(
+      res=>{
+        console.log('Esta es la respuesta del refresh', res);
+        
+        this.usuario = res
+      }
+    )
+  }
+
+  getUserLocal(){
+    return this.usuario;
+  }
+
   async getLoggedUser(){
     if (!this.usuario) {
       await this.validateToken()
@@ -42,7 +58,18 @@ export class AuthService {
   }
 
   logout(){
-    return this.http.get(`${url}/logout`)
+    return this.http.get(`${url}/logout`).pipe(
+      map(async res=>{
+
+        await this.tokenService.getToken()
+        this.tokenService.token = null;
+        this.usuario = null;
+        await this.tokenService.clearStorage()
+        this.router.navigateByUrl('/auth/login')
+
+        return res;
+      })
+    )
   }
 
   requestAccessToken(){
@@ -65,7 +92,7 @@ export class AuthService {
     this.router.navigateByUrl('/auth/login')
   }
 
-  async validateToken(){
+  async validateToken(dashboard:boolean = false){
     let token = await this.tokenService.getToken();
     if(!token){
       this.logoutAlternative(false,true)
@@ -75,7 +102,22 @@ export class AuthService {
       this.getUser().subscribe(
         res=>{
           this.usuario = res
-          return resolve(true)
+          if (dashboard) {
+            if (this.validateRole(1)) {
+              if (this.validatePayment()) {
+                return resolve(true)
+              }else{
+                this.router.navigateByUrl('/payment')
+                return resolve(false)
+              } 
+            }else{
+              this.router.navigateByUrl('/employee')
+              return resolve(false);
+            }
+          }else{
+
+            return resolve(true)
+          }
         },
         err=>{
           this.logoutAlternative(false);
@@ -84,6 +126,22 @@ export class AuthService {
       )
 
     });
+  }
+
+  validatePayment():boolean{
+    if(this.usuario.state === 1){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  validateRole(role:number){
+    if (this.usuario.role.id === role) {
+      return true;
+    }else{
+      return false;
+    }
   }
 
   async validateAuthBefore():Promise<boolean>{
