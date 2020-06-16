@@ -1,0 +1,9 @@
+<div class="wrapper" *ngIf="(user)" >
+    <app-navbar  [usuario]="user"></app-navbar>
+    <app-sidebar [opciones]="opciones" [usuario]="user"></app-sidebar>
+
+    <div style="position: relative;height: 94.3vh !important;"  class="content-wrapper py-3 px-md-3 px-0">
+        <ngx-spinner bdColor = "rgb(0,0,0)" size = "medium" color = "#fff" type = "ball-clip-rotate-pulse" [fullScreen] = "false"><p style="color: white;">Por favor espere...</p> </ngx-spinner>
+        <router-outlet></router-outlet>
+    </div>
+</div>

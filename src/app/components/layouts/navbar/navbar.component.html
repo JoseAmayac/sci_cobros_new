@@ -1,8 +1,4 @@
 <!-- Navbar -->
-
-
-
-<!-- Navbar -->
 <nav  class="main-header navbar navbar-expand  navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -45,7 +41,7 @@
               <p >
                   {{ username }} - {{ usuario.role.name }}
                   <br>
-                  <span>{{ usuario.email || '' }}</span>
+                  <span>{{ usuario.email || usuario.username }}</span>
                   <small>Miembro desde {{ usuario.created_at|date: 'mediumDate' : '' : 'es-US' || '' }}</small>
               </p>
           </li>

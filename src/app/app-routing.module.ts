@@ -15,14 +15,25 @@ const routes: Routes = [
   {
     path:'payment',
     loadChildren: ()=>import('./pages/payment/payment.module').then(m=>m.PaymentModule),
-    canActivate:[AuthCheckGuard]
+    canActivate:[AuthCheckGuard],
+    data:{
+      ruta:2
+    }
   },
   {
     path:'dashboard',
     loadChildren: ()=>import('./pages/admin/admin.module').then(m=>m.AdminModule),
     canActivate:[AuthCheckGuard],
     data:{
-      dashboard:true
+      ruta:1
+    }
+  },
+  {
+    path:'employee',
+    loadChildren: ()=>import('./pages/employee/employee.module').then(m => m.EmployeeModule),
+    canActivate:[AuthCheckGuard],
+    data:{
+      ruta: 3
     }
   },
   {

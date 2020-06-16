@@ -92,7 +92,7 @@ export class AuthService {
     this.router.navigateByUrl('/auth/login')
   }
 
-  async validateToken(dashboard:boolean = false){
+  async validateToken(ruta:number = 1){
     let token = await this.tokenService.getToken();
     if(!token){
       this.logoutAlternative(false,true)
@@ -102,7 +102,7 @@ export class AuthService {
       this.getUser().subscribe(
         res=>{
           this.usuario = res
-          if (dashboard) {
+          if (ruta === 1) {
             if (this.validateRole(1)) {
               if (this.validatePayment()) {
                 return resolve(true)
@@ -115,8 +115,27 @@ export class AuthService {
               return resolve(false);
             }
           }else{
+            if (ruta === 2) {
+              if (this.validateRole(1)) {
+                if (!this.validatePayment()) {
+                  return resolve(true)
+                }else{
+                  this.router.navigateByUrl('/dashboard')
+                  return resolve(false)
+                }
+              }else{
+                this.router.navigateByUrl('/employee')
+                return resolve(false)
+              }
+            }else{
+              if (this.validateRole(2)) {
+                return resolve(true)
+              }else{
+                this.router.navigateByUrl('/dashboard')
+                return resolve(false)
+              }
+            }
 
-            return resolve(true)
           }
         },
         err=>{
@@ -124,7 +143,6 @@ export class AuthService {
           return resolve(false)
         }
       )
-
     });
   }
 
