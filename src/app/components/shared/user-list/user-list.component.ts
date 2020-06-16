@@ -25,6 +25,7 @@ export class UserListComponent implements OnInit {
     if (event.value === "") {
       this.usuarios = this.arregloTemp;
     }else{
+      this.page = 1;
       this.usuarios = this.arregloTemp;
       this.usuarios = this.usuarios.filter( usuario =>{
         return usuario.name.toLocaleLowerCase().includes( event.value.toLowerCase() ) || 
