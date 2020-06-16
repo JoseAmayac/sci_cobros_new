@@ -1,11 +1,23 @@
 <!-- Default box -->
 <div class="card card-solid" *ngIf="usuarios" >
     <div class="card-body pb-0">
-      <div class="row d-flex ">
-        <div *ngFor="let usuario of usuarios" class="col-12 col-sm-6 col-md-4 ">
+      <div class="form-group">
+        <input #inputBuscar type="text" placeholder="Buscar" (input)="buscar(inputBuscar)" class="form-control">
+      </div>
+      <div class="row d-flex " *ngIf="usuarios.length > 0" >
+        <div *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 9, currentPage:page, totalItems: usuarios.length }" class="col-12 col-sm-6 col-md-4 ">
           <app-user-card class="w-100" [usuario]="usuario" ></app-user-card>
         </div>
       </div>
+      <div class="row" *ngIf="usuarios.length === 0" >
+        <div class="col text-center" *ngIf="textoBuscar.length > 0" >
+          <h5>No hay resultados para la búsqueda: <strong>{{ textoBuscar }}</strong></h5>
+        </div>
+        <div class="col text-center" *ngIf="textoBuscar.length === 0 && usuarios.length === 0" >
+          <h4>No hay datos para mostrar</h4>
+        </div>
+      </div>
+      <pagination-controls class="float-right" previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="page = $event"></pagination-controls>
     </div>
   </div>
 <!-- /.card -->

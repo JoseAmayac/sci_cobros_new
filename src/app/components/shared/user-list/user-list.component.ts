@@ -9,10 +9,30 @@ import { User } from 'src/app/interfaces/interfaces';
 export class UserListComponent implements OnInit {
 
   @Input() usuarios:User[] = [];
+  arregloTemp:User[];
+  page:number = 1;
+
+  textoBuscar:string = "";
 
   constructor() { }
 
   ngOnInit() {
+    this.arregloTemp = this.usuarios;
+  }
+
+  buscar(event){
+    this.textoBuscar = event.value;
+    if (event.value === "") {
+      this.usuarios = this.arregloTemp;
+    }else{
+      this.usuarios = this.arregloTemp;
+      this.usuarios = this.usuarios.filter( usuario =>{
+        return usuario.name.toLocaleLowerCase().includes( event.value.toLowerCase() ) || 
+               usuario.lastname.toLocaleLowerCase().includes(event.value.toLowerCase()) ||
+               (usuario.name + " " + usuario.lastname).toLocaleLowerCase().includes(event.value.toLowerCase()) || 
+               usuario.dni.toLocaleLowerCase().includes(event.value.toLowerCase())
+      })
+    }
   }
 
 }

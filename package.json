@@ -32,6 +32,8 @@
     "ionicons": "^4.6.3",
     "jquery": "^3.5.1",
     "jquery-ui": "^1.12.1",
+    "ng2-search-filter": "^0.5.1",
+    "ngx-pagination": "^5.0.0",
     "ngx-paypal": "^6.1.0",
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^12.1.0",
